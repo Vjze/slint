@@ -1,0 +1,77 @@
+import { StandardButton , LineEdit} from "std-widgets.slint";
+import {SURDialog} from "../../SurrealismUI-main/index.slint";
+import { Button } from "../../SurrealismUI-main/src/button/button.slint";
+
+export struct LoginInfos {
+    name:string,
+    password:string,
+}
+export global Lgo {
+    callback login_clicked(LoginInfos);
+    callback login_cancel;
+    in-out property <bool> is-login : false;
+}
+export component Login inherits Rectangle {
+    width: 480px;
+    height: 480px;
+    
+
+        VerticalLayout {
+          padding: 20px;
+          alignment: center;
+          spacing: 10px;
+            HorizontalLayout{
+              padding: 50px;
+              alignment:center;
+              spacing: 30px;
+                Text {text : @tr("账号：");
+                font-size: 14px;
+                font-weight: 650;}
+                name_input := LineEdit { 
+                    placeholder-text : @tr("输入账号....");
+                    font-size: 14px;
+
+                 }
+            }
+            HorizontalLayout{
+              padding: 20px;
+              alignment: center;
+              spacing: 30px;
+                Text {text : @tr("密码：");
+                font-size: 14px;
+                font-weight: 650;}
+                password_input := LineEdit { 
+                    placeholder-text : @tr("输入密码....");
+                    font-size: 14px;
+                    input-type: password;
+                }
+            }
+            HorizontalLayout {
+              padding: 50px;
+              alignment: center;
+              spacing: 100px;
+              Button { 
+                  width: 70px;
+                  height: 32px;
+                  content: "取消";
+                  clicked => {
+                    Lgo.login-cancel()
+                  }
+               }
+               Button {
+                width: 70px;
+                  height: 32px;
+                  content: "登录";
+                  clicked => {
+                    Lgo.login_clicked({
+                      name:name_input.text,
+                      password:password-input.text,
+                    })
+                  }
+               }
+            }
+           
+        }
+
+    
+  }

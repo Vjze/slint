@@ -1,0 +1,32 @@
+import { StyleMetrics } from "std-widgets.slint";
+import { MenuBar} from "menubar.slint";
+import { Login, LoginInfos,Lgo} from "pages/login.slint";
+import { QueryPage,Action,Infos_Box,Infos_Sn,InfosData,DateTimeAdapter,Dia,QueryTime} from "pages/query.slint";
+export { QueryPage,Action,Infos_Box,Infos_Sn,InfosData,DateTimeAdapter,Dia,QueryTime,Login,LoginInfos,Lgo}
+
+export component App inherits Window {
+    
+    width: 1600px;
+    height: 800px;
+    icon: @image-url("../resources/logo/logo.png");
+    callback login_clicked <=> Lgo.login_clicked;
+    callback login_cancel <=> Lgo.login_cancel;
+    callback show_confirm_popup <=> dia.show_confirm_popup;
+    in-out property is-login <=> Lgo.is-login ;
+    background: StyleMetrics.window-background;
+    title: @tr("Slint_Tools");
+    
+    if root.is-login == false : Login {}
+    if root.is-login == true : HorizontalLayout {
+        menu := MenuBar {}
+
+        // side-bar := SideBar {
+        //     title: @tr("功能选择");
+        //     model: [@tr("Menu" => "查询"), @tr("Menu" => "绑定"), @tr("Menu" => "工单"), @tr("Menu" => "Todo"), @tr("Menu" => "About")];
+        // }
+
+        if(menu.active == 0) :  QueryPage {}
+    }
+    dia := Dia { }
+    
+}

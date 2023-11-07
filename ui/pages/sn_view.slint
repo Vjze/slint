@@ -1,0 +1,351 @@
+import {GroupBox,ComboBox, ListView,Button, LineEdit} from "std-widgets.slint";
+import { SURButton,SURInput } from "../../SurrealismUI-main/index.slint";
+import { Themes,IconSources } from "../../SurrealismUI-main/themes/index.slint";
+import { Time } from "bottom.slint";
+export struct Action  {
+    type: string,
+    text: string,
+}
+export struct Infos_Box {
+    box_sn: string,
+    sn: string,
+    pn: string,
+    order: string,
+    workerid: string,
+    date: string,
+}
+export struct Infos_Sn {
+    sn: string,
+    productBill: string,
+    testType: string,
+    result: string,
+    ith: string,
+    pf: string,
+    vop: string,
+    im: string,
+    rs: string,
+    sen: string,
+    res: string,
+    icc: string,
+    idark: string,
+    vbr:string,
+    ixtalk: string,
+    kink: string,
+    testdate: string,
+}
+export global InfosData {
+    callback query(Action);
+    in-out property<[Infos_Box]> datas_box;
+    in-out property<[Infos_Sn]> datas_sn;
+    in-out property <string> text;
+    in-out property <string> version;
+
+}
+
+export component QueryPage inherits Rectangle {
+    VerticalLayout {
+        // spacing: 15px;
+        HorizontalLayout {
+            height: 50px;
+            alignment: start;
+            spacing :20px;
+            text-edit :=LineEdit {
+                y:10px;
+                height: 30px;
+                placeholder-text : @tr("输入条码....");
+                accepted => {
+                    query.clicked();
+                    
+                }
+                // theme:Themes.Warning;
+                // clearable:true;
+
+            }
+
+            text-edit-clean := SURButton{
+                y:10px;
+                height: 30px;
+                content: "";
+                icon: @image-url("../../SurrealismUI-main/icons/clear.svg");
+                clicked => {
+                    text-edit.text = ""
+                }
+            }
+            
+            mode_cb := ComboBox {
+                y:10px;
+                height: 32px;
+                current_index: 0;
+                model: [@tr("SN"), @tr("Box"),@tr("Carton"), @tr("Worker_ID"), @tr("Date")];
+                
+
+            }
+        
+            query := SURButton {
+                // theme: Light;
+                y:10px;
+                width: 70px;
+                height: 32px;
+                icon: @image-url("../../SurrealismUI-main/icons/search.svg");
+                content: @tr(" 查询 ");
+                clicked => {
+                    InfosData.query({
+                    type:mode-cb.current-value,
+                    text:text-edit.text
+                    })
+                }
+                
+                font-size: 14px;
+                font-weight: 650;
+                letter-spacing: 2px;
+            }
+        
+            text := Rectangle {
+                Text{
+                   text : @tr("数量：{}",InfosData.text);
+                   font-size: 15px;
+                   font-weight: 650;
+                }
+                 
+                
+            }
+        
+        }
+    
+    // Rectangle{
+        if mode-cb.current-index == 0 :VerticalLayout{
+            alignment: start;
+            height: root.height*0.9;
+        HorizontalLayout {
+            Text {
+                text: @tr("SN");
+                width: 180px;
+                font-weight: 650;
+                horizontal-alignment: center;
+                font-size: 15px;
+                
+            }
+            for da in [
+                // {text: @tr("SN")},
+                {text: @tr("工号")},
+                {text: @tr("料号")},
+                {text: @tr("结果")},
+                {text: @tr("Ith")},
+                {text: @tr("Pf")},
+                {text: @tr("Vop")},
+                {text: @tr("Im")},
+                {text: @tr("Rs")},
+                {text: @tr("Sen")},
+                {text: @tr("Res")},
+                {text: @tr("ICC")},
+                {text: @tr("Idark")},
+                {text: @tr("Vbr")},
+                {text: @tr("IXtalk")},
+                {text: @tr("Kink")},
+                // {text: @tr("TestDate")},
+            ] : Text {
+                        text: da.text;
+                        font-weight: 650;
+                        font-size: 15px;
+                    }
+                
+                    Text {
+                text: @tr("TestDate");
+                horizontal-alignment: center;
+                width: 200px;
+                font-weight: 650;
+                font-size: 15px;
+            }
+        }
+            
+        ListView {
+            height: root.height;
+            for data in InfosData.datas_sn: HorizontalLayout {
+                    Text {
+                        text: {data.sn};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.productBill};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.testType};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.result};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.ith};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.pf};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.vop};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.im};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.rs};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.sen};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.res};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.icc};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.idark};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.vbr};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.ixtalk};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.kink};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.testdate};
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                    
+                }
+            }
+        }
+
+        if mode-cb.current-index == 1 :VerticalLayout{
+        alignment: start;
+        height: root.height*0.9;
+        HorizontalLayout {
+                        for da in [
+                            {text: @tr("盒号")},
+                            {text: @tr("SN")},
+                            {text: @tr("料号")},
+                            {text: @tr("工单号")},
+                            {text: @tr("操作员")},
+                            {text: @tr("装盒时间")},
+                        ] : 
+                                Text {
+                                    text: da.text;
+                                    horizontal-alignment: center;
+                                    vertical-alignment: center;
+                                    font-weight: 550;
+                                    font-size: 15px;
+                                }
+                            
+                    }
+                    
+        ListView {
+            height: root.height;
+            for data in InfosData.datas_box: HorizontalLayout {
+                    Text {
+                        text: {data.box-sn};
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                        font-size: 13px;
+                        height: 25px;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.sn};
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                        font-size: 13px;
+                        height: 25px;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.pn};
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                        font-size: 13px;
+                        height: 25px;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.order};
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                        font-size: 13px;
+                        height: 25px;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.workerid};
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                        font-size: 13px;
+                        height: 25px;
+                        font-weight: 550;
+                    }
+                    Text {
+                        text: {data.date};
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                        font-size: 13px;
+                        height: 25px;
+                        font-weight: 550;
+                    }
+                }
+            }
+        }
+        HorizontalLayout {
+            HorizontalLayout {
+                alignment: end;
+                vertical-stretch:1;
+                Time {}
+            }
+            HorizontalLayout {
+                alignment: end;
+                Text{
+                    text : @tr("Version:{}",InfosData.version);
+                    font-size: 14px;
+                    vertical-alignment: center;
+                    horizontal-alignment: center;
+                    font-weight: 550;
+                 }
+            }
+        }
+        
+    }
+}
+    // }
+    
