@@ -9,13 +9,8 @@ export struct LoginInfos {
 export global Lgo {
     callback login_clicked(LoginInfos);
     callback login_cancel;
-    in-out property <bool> is-login : false;
 }
 export component Login inherits Rectangle {
-    width: 480px;
-    height: 480px;
-    
-
         VerticalLayout {
           padding: 20px;
           alignment: center;
