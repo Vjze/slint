@@ -1,6 +1,6 @@
-import { StandardButton , LineEdit} from "std-widgets.slint";
-import {SURDialog} from "../../SurrealismUI-main/index.slint";
-import { Button } from "../../SurrealismUI-main/src/button/button.slint";
+// import { StandardButton , LineEdit} from "std-widgets.slint";
+import {SURDialog, SURButton, SURInput} from "../../SurrealismUI-main/index.slint";
+// import { Button } from "../../SurrealismUI-main/src/button/button.slint";
 
 export struct LoginInfos {
     name:string,
@@ -22,10 +22,11 @@ export component Login inherits Rectangle {
                 Text {text : @tr("账号：");
                 font-size: 14px;
                 font-weight: 650;}
-                name_input := LineEdit { 
-                    placeholder-text : @tr("输入账号....");
-                    font-size: 14px;
-
+                name_input := SURInput { 
+                  width: 40%;
+                    placeholder : @tr("输入账号....");
+                    font-size : 14px;
+                    clearable: true;
                  }
             }
             HorizontalLayout{
@@ -35,32 +36,35 @@ export component Login inherits Rectangle {
                 Text {text : @tr("密码：");
                 font-size: 14px;
                 font-weight: 650;}
-                password_input := LineEdit { 
-                    placeholder-text : @tr("输入密码....");
+                password_input := SURInput { 
+                  width: 40%;
+                    placeholder : @tr("输入密码....");
                     font-size: 14px;
-                    input-type: password;
+                    type:InputType.password;
+                    password: true;
+                    clearable: true;
                 }
             }
             HorizontalLayout {
               padding: 50px;
               alignment: center;
               spacing: 100px;
-              Button { 
+              SURButton { 
                   width: 70px;
                   height: 32px;
-                  content: "取消";
+                  text: "取消";
                   clicked => {
                     Lgo.login-cancel()
                   }
                }
-               Button {
+               SURButton {
                 width: 70px;
                   height: 32px;
-                  content: "登录";
+                  text: "登录";
                   clicked => {
                     Lgo.login_clicked({
-                      name:name_input.text,
-                      password:password-input.text,
+                      name:name_input.get(),
+                      password:password-input.get(),
                     })
                   }
                }

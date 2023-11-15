@@ -93,13 +93,13 @@ export component Result inherits SURCard {
         height: root.icon-size;
         width: root.icon-size;
         theme: root.theme;
-        icon: root.icon;
+        source: root.icon;
         
       }
     }
     SURText { 
       theme: root.theme;
-      content: root.content;
+      text: root.content;
       wrap: word-wrap;
       
       
@@ -109,7 +109,7 @@ export component Result inherits SURCard {
       width: parent.width;
       button:=SURButton { 
         theme: root.theme;
-        content: root.btn;
+        text: root.btn;
         clicked => {
           root.clicked()
         }

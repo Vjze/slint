@@ -1,0 +1,29 @@
+import {SURDrawer,SURButton, SURInput} from "../../index.slint";
+import {Themes} from "../../themes/index.slint";
+
+component TestDrawer inherits Window {
+  height: 800px;
+  width: 800px;
+  background: #535353;
+ 
+  SURButton {
+    
+    content: "show";
+    clicked => {
+      p.open();
+      
+      debug("sds1")
+    }
+  }
+ 
+
+  p:=SURDrawer {
+    proportion:36%;
+    SURButton {
+      theme: Dark;
+    }
+    SURInput { 
+      y: 30px;
+     }
+  }
+}

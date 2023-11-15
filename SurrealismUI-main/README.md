@@ -1,11 +1,11 @@
-<img src="https://img.shields.io/badge/SurrealismUI-0.1.6-orange?style=flat-square&logo=rust&logoColor=%23fff&labelColor=%23DEA584&color=%23DEA584">  <img src="https://img.shields.io/badge/License-MIT-orange?style=flat-square&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
+<img src="https://img.shields.io/badge/SurrealismUI-0.2.2-orange?style=flat-square&logo=rust&logoColor=%23fff&labelColor=%23DEA584&color=%23DEA584">  <img src="https://img.shields.io/badge/License-MIT-orange?style=flat-square&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
 
 # SurrealismUI
 
 - author：syf20020816@outlook.com
 - createDate：20230908
-- updateDate：202301010
-- version：0.1.6
+- updateDate：202301112
+- version：0.2.2
 - email：syf20020816@outlook.com
 
 <img src="https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/logo.png">
@@ -18,43 +18,6 @@ SurrealismUI is a third-party component library built entirely using Slint
 
 - ⛔ ： do not use
 - 👍 ： Recommended use
-
-### Updates
-
-- V0.1.6
-  - solve `SURLoading` animation!
-
-- V0.1.5
-  - add `SURMenu`
-  - enhance `SURTip` (the location of the tip can be changed now  and you can show it with hover ! )
-
-- V0.1.4
-  - add `SURTip`
-  - add `SURLoading`
-  - add `SURDialog`
-
-- V0.1.3
-  - add `SURBadge`
-  - add `Progress`
-  - add `Persona`
-- V0.1.2
-  - rebuild components (have `SURIcon`)
-  - rebuild `SURIcon`
-  - rebuild file structure
-  - solve memery overflow issue
-  - use minimize import principle (remove inner loop to judge component show!)❗
-  - test use Rust✅
-- V0.1.1
-  - add `SURRadio`
-  - add `SURDivider`
-  - add `SURCollection`
-  - add `SURPopup`
-- V0.1.0
-  - Adopting Fluent2's component design style
-  - Multiple default methods are provided for consumers to call (see index.slint which on the outermost side)
-  - Decoupling functions and components
-  - Fix some style errors
-  - add `SURLink` and `SURAvatar`
 
 ## Themes
 
@@ -144,7 +107,6 @@ Slint's work on topic definition will simultaneously affect the built-in compone
  It is the simplest and most common component in SurrealismUI
  #### properties:
  - `in property <Themes> theme` : Surrealism themes
- - `in-out property <string> content` : the content in SURText
  #### callbacks: 
  #### functions:
  - `pure public function get()->string` : get content
@@ -159,27 +121,26 @@ import {Themes} from "../../themes/index.slint";
 component TestWindow inherits Window {
   height: 400px;
   width: 400px;
-  background:#fff;
+  
   SURText {
     x: 100px;
     y: 20px;
-    content: "hello world";
+    text: "hello world";
   }
   SURText {
-    x:100px;
-    y:100px;
-    theme:Themes.Error;
+    x: 100px;
+    theme: Primary;
+    text: "hello world";
   }
- 
 }
 ```
 
-![image-20230910102940392](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20230910102940392.png)
+![image-20231112134855878](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231112134855878.png)
 
  ### SURIcon
  there are 2658 different icons in SURIcon from : https://github.com/bytedance/iconpark
  #### properties:
- - `in property <image> icon` : icon types
+ - `in property <image> source` : icon source
  - `out property <bool> has-hover` : has hover or not
  - `in property <Themes> theme` : Surrealism theme
  - `in-out property <brush> icon-color` : icon color 
@@ -200,26 +161,27 @@ export component TestIcon inherits Window {
   GridLayout {
     spacing: 40px;
     Row{
+      
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/sd-card.svg");
+        source: @image-url("../../icons/sd-card.svg");
         theme: Themes.Primary;
       }
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/add-computer.svg");
+        source: @image-url("../../icons/add-computer.svg");
         theme: Themes.Success;
       }
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/yep.svg");
+        source: @image-url("../../icons/yep.svg");
         theme: Themes.Error;
       }
       SURIcon{
-        icon: @image-url("../../icons/t-shirt.svg");
+        source: @image-url("../../icons/t-shirt.svg");
         theme: Themes.Dark;
         height: 30px;
         width: 30px;
@@ -227,13 +189,13 @@ export component TestIcon inherits Window {
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/video-conference.svg");
+        source: @image-url("../../icons/video-conference.svg");
         theme: Themes.Info;
       }
       SURIcon{
         height: 30px;
         width: 30px;
-        icon:@image-url("../../icons/vacation.svg");
+        source:@image-url("../../icons/vacation.svg");
         theme: Themes.Warning;
         clicked=>{
           debug("clicked");
@@ -247,23 +209,23 @@ export component TestIcon inherits Window {
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/cake-five.svg");
+        source: @image-url("../../icons/cake-five.svg");
         theme: Themes.Primary;
       }
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/label.svg");
+        source: @image-url("../../icons/label.svg");
         theme: Themes.Success;
       }
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/wifi.svg");
+        source: @image-url("../../icons/wifi.svg");
         theme: Themes.Error;
       }
       SURIcon{
-        icon: @image-url("../../icons/wallet-one.svg");
+        source: @image-url("../../icons/wallet-one.svg");
         theme: Themes.Dark;
         height: 30px;
         width: 30px;
@@ -271,13 +233,13 @@ export component TestIcon inherits Window {
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/game-console.svg");
+        source: @image-url("../../icons/game-console.svg");
         theme: Themes.Info;
       }
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/qiyehao.svg");
+        source: @image-url("../../icons/qiyehao.svg");
         theme: Themes.Warning;
       }
     }
@@ -285,23 +247,23 @@ export component TestIcon inherits Window {
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/scanning-two.svg");
+        source: @image-url("../../icons/scanning-two.svg");
         theme: Themes.Primary;
       }
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/oceanengine.svg");
+        source: @image-url("../../icons/oceanengine.svg");
         theme: Themes.Success;
       }
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/zoom-internal.svg");
+        source: @image-url("../../icons/zoom-internal.svg");
         theme: Themes.Error;
       }
       SURIcon{
-        icon: @image-url("../../icons/zip.svg");
+        source: @image-url("../../icons/zip.svg");
         theme: Themes.Dark;
         height: 30px;
         width: 30px;
@@ -309,13 +271,13 @@ export component TestIcon inherits Window {
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/f-eight-key.svg");
+        source: @image-url("../../icons/f-eight-key.svg");
         theme: Themes.Info;
       }
       SURIcon{
         height: 30px;
         width: 30px;
-        icon: @image-url("../../icons/pacifier.svg");
+        source: @image-url("../../icons/pacifier.svg");
         theme: Themes.Warning;
       }
     }
@@ -354,7 +316,7 @@ component TestCard inherits Window {
     y: 20px;
     card-width:text.width;
     text:=SURText {
-      content: "SURCard";
+      text: "SURCard";
     }
    }
    SURCard { 
@@ -396,6 +358,7 @@ SURButton is a button component that you can freely perform regular attribute op
 - `in property <int> font-weight`: button font weight
 - `in property <string> font-family`: button font family
 - `in-out property <string> content` : the content of the button;
+- `in property <bool> show-icon` : control  the icon load or not
 #### functions
 #### callbacks 
 - `clicked` : run if you click the button
@@ -403,15 +366,15 @@ SURButton is a button component that you can freely perform regular attribute op
 #### example
 
 ```
-import {SURButton} from "/index.slint";
-import {Themes,IconSources} from "/themes/index.slint";
+import {SURButton} from "../../index.slint";
+import {Themes,IconSources} from "../../themes/index.slint";
 component TestButton inherits Window {
   height: 400px;
   width: 400px;
   SURButton {
     x: 20px;
     y: 10px;
-    
+    show-icon:true;
     theme:Themes.Dark;
     icon:@image-url("../../icons/safe-retrieval.svg");
     clicked => {
@@ -424,7 +387,8 @@ component TestButton inherits Window {
 
     content:"Save";
     clicked => {
-      self.content = "clicked"
+      self.content = "clicked";
+      
     }
   }
   SURButton {
@@ -456,7 +420,6 @@ component TestButton inherits Window {
   SURButton {
     x: 200px;
     y: 200px;
-    
     theme:Themes.Warning;
   }
 }
@@ -470,7 +433,7 @@ component TestButton inherits Window {
  #### properties :
  - `in property <string> placeholder` : default placeholder which you wanna show when no content
  - `in property <Themes> theme` : Surrealism themes
- - `in property <image> icon` : icon you wanna show in front (use >= v0.1.0) ⛔
+ - `in property <int> font-weight` : font weight for input
  - `in property <length> input-width` : Please do not use width to adjust the length of the input box , use this property to instead
  - `in property <length> font-size` : font size 
  - `in property <bool> disabled` : can input be edited
@@ -485,58 +448,75 @@ component TestButton inherits Window {
  #### functions :
  - `pure public function get() ->string ` : get content
  - `public function set(content` :string) ` : set content
- - `pure public function count-width()->length ` : count input real width ⛔
+- `public function clear()` : clear content
+- `public function select-all()` : select all 
+- `public function clear-selection()` : clears the selection
+- `public function cut()` : copies the selected text to the clipboard and removes it from the editable area
+- `public function copy() `: copies the selected text to the clipboard
+* `public function paste()` : pastes the text content of the clipboard at the cursor position
  #### callbacks :
  - `callback accepted(string) ` : run when pressed down Enter key
  - `callback changed(string) ` : run when content changed
- - `callback clear() ` : empty content
 
 #### example
 
 ```slint
-import {SURText,SURInput,SURButton, SURIcon} from "../../index.slint";
+import {SURText,SURInput,SURButton, SURIcon,SURPopup} from "../../index.slint";
 import {Themes} from "../../themes/index.slint";
+import { TextEdit , LineEdit} from "std-widgets.slint";
+import { Invoke } from "./invoke_input.slint";
 
 export component TestInput inherits Window {
   height: 500px;
   width: 600px;
-  
+  p:=SURPopup {
+    Invoke {}
+  }
   SURInput{
     y: 20px;
+    width: 60%;
     placeholder :"please enter your username";
-    input-width:360px;
+    input-width:300px;
+    clearable: true;
     accepted(res)=>{
       debug("content in input:" + res);
+      p.open();
     }
     changed(change-res)=>{
       debug(change-res);
     }
     
   }
+ 
   w:=SURInput{
     y: 80px;
+    width: 60%;
     theme:Themes.Success;
     type:InputType.password;
     password:true;
   }
   SURInput{
     y: 140px;
+    width: 60%;
     theme:Themes.Error;
     disabled:true;
     content:"disabled";
   }
   SURInput{
     y: 200px;
+    width: 60%;
     theme:Themes.Dark;
   }
 
   SURInput{
     y: 260px;
+    width: 60%;
     theme:Themes.Warning;
     clearable:true;
   }
   SURInput{
     y: 320px;
+    // width: 60%;
     theme:Themes.Info;
     type:InputType.password;
     clearable:true;
@@ -546,7 +526,7 @@ export component TestInput inherits Window {
 }
 ```
 
-![image-20230910104857757](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20230910104857757.png)
+![image-20231105000702807](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231105000702807.png)
 
  ### SURStar
  SURStar is a scoring component
@@ -588,7 +568,7 @@ component TestWindow inherits Window {
   SURButton {
     y: 320px;
     x:10px;
-    content: "add half";
+    text: "add half";
     clicked => {
       hs.add-half();
     }
@@ -608,7 +588,7 @@ component TestWindow inherits Window {
   SURButton {
     y: 320px;
     x: 115px;
-    content: "add one";
+    text: "add one";
     clicked => {
       os.add-one();
     }
@@ -626,7 +606,7 @@ component TestWindow inherits Window {
   SURButton {
     y: 320px;
     x: 220px;
-    content: "get A";
+    text: "get A";
     clicked => {
       fs.full();
     }
@@ -634,7 +614,7 @@ component TestWindow inherits Window {
   SURButton {
     y: 320px;
     x: 305px;
-    content: "clear";
+    text: "clear";
     clicked => {
       fs.clear();
     }
@@ -654,12 +634,13 @@ component TestWindow inherits Window {
  ### SURTag
  A small tag used to display data
  #### properties
- - `in property <string> content` : the content of the tag
- - see card's properties
+ - `in property <string> text` : the text of the tag
+ - `in property <brush> font-color` : tag font color
+ - `in property <length> font-size` : tag font size
  #### functions
  see card's functions
  #### callbacks
- - `callback clicked()` : run if you click the tag
+ - `callback clicked(string)` : run if you click the tag
 
 #### example
 
@@ -671,22 +652,24 @@ component TestWindow inherits Window {
   height: 400px;
   width: 400px;
   SURTag {
+    text:"default";
     y: 40px;
   }
   SURTag {
-    content:"error!";
+    text:"error!";
     y:80px;
     theme:Themes.Error;
   }
   SURTag {
+    text:"callback";
     y:120px;
     theme:Themes.Dark;
-    clicked=>{
+    clicked(text)=>{
       self.font-color= #ddff00;
     }
   }
   SURTag {
-    content:"success";
+    text:"success";
     y:160px;
    
     theme:Themes.Success;
@@ -694,7 +677,7 @@ component TestWindow inherits Window {
 }
 ```
 
-![image-20230910105626765](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20230910105626765.png)
+![image-20231112134533009](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231112134533009.png)
 
  ### SURHeader
  SURHeader is a simple header component that is generated based on routing information
@@ -1086,10 +1069,17 @@ SURLink is commonly used to represent text connections or sharing
 
 * `in property <image> icon` : share icon you can use whatever you want
 * `in property <bool> funny` : Easter egg just funny
+* `in property <bool> underline` : has underline
+* `out property <bool> has-hover` : link has been hover or not
+* `in property <MouseCursor> mouse-cursor `: mouse cursor
+* `in property <Themes> theme` : Surrealism Theme
+* `in property <length> font-size` : link font size
+* `in-out property <string> text` : link text
+* `private property <brush> text-color`: text color⛔
 
 #### callbacks
 
-* `callback clicked()` :  run if you click share icon
+* `callback clicked(string)` :  run if you click share icon
 
 #### exeample
 
@@ -1104,18 +1094,20 @@ component TestWindow inherits Window {
   SURLink {
     y: 100px;
     theme: Dark;
+    text: "no underline";
+    underline: false;
   }
   SURLink {
     y: 160px;
     funny:true;
     theme: Warning;
-    content: "funny for link!";
+    text: "funny for link!";
   }
   SURLink {
     y: 220px;
     theme: Primary;
     icon: @image-url("../../icons/share-one.svg");
-    content: "share one";
+    text: "share one";
   }
   SURLink {
     y: 280px;
@@ -1123,7 +1115,7 @@ component TestWindow inherits Window {
     theme: Error;
     icon : @image-url("../../icons/share-sys.svg");
     font-size: 24px;
-    content: "share sys";
+    text: "share sys";
     clicked=>{
       debug("share sys!")
     }
@@ -1131,7 +1123,7 @@ component TestWindow inherits Window {
 }
 ```
 
-![image-20230910110312615](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20230910110312615.png)
+![image-20231112134443536](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231112134443536.png)
 
 ### SURAvatar
 
@@ -1252,14 +1244,14 @@ And users will not be able to use the pop-up layer to cover the components under
 import {SURPopup,SURButton} from "../../index.slint";
 import {Themes} from "../../themes/index.slint";
 
-component TestDivider inherits Window {
+component TestPopup inherits Window {
   height: 800px;
   width: 800px;
   background: #535353;
  
   SURButton {
     
-    content: "show";
+    text: "show";
     clicked => {
       p.open();
       
@@ -1270,7 +1262,7 @@ component TestDivider inherits Window {
 
   p:=SURPopup {
     SURButton {
-      content: "you can add anything in Popup";
+      text: "you can add anything in Popup";
       y: 160px;
     }
   }
@@ -1539,6 +1531,7 @@ component TestCollection inherits Window {
 ### SURProgress
 SURProgress is commonly used to display download progress or event processing progress
 And you can fully control it through the progress property
+
 #### properties
 - `in property <Themes> theme` : Surrealism theme
 - `in property <string> content` : what you wanna show to others
@@ -1575,7 +1568,7 @@ component TestDivider inherits Window {
   SURButton{
     x: 60px;
     y: 340px;
-    content: "add";
+    text: "add";
     clicked => {
       a.add(5);
     }
@@ -1583,7 +1576,7 @@ component TestDivider inherits Window {
   SURButton{
     x: 160px;
     y: 340px;
-    content: "full";
+    text: "full";
     clicked => {
       a.full();
     }
@@ -1591,7 +1584,7 @@ component TestDivider inherits Window {
   SURButton{
     x: 260px;
     y: 340px;
-    content: "clear";
+    text: "clear";
     clicked => {
       a.clear();
     }
@@ -1674,8 +1667,6 @@ component TestWindow inherits Window {
 }
 ```
 
-![image-20230916101547495](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20230916101547495.png)
-
 ![image-20230930183024974](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20230930183024974.png)
 
 ### SURLoading (some error in animation < version V0.1.6)
@@ -1708,14 +1699,14 @@ export component TestLoading inherits Window {
     width: 400px;
     SURButton {
       y: 100px;
-      content: "show";
+      text: "show";
       clicked => {
         p.open();
       }
     }
     SURButton {
       y: 160px;
-      content: "close";
+      text: "close";
       clicked => {
         p.close();
       }
@@ -1766,7 +1757,7 @@ component TestDialog inherits Window {
  
   SURButton {
     
-    content: "show";
+    text: "show";
     clicked => {
       p.open();
     }
@@ -1859,3 +1850,494 @@ component TestMenu inherits Window {
 ```
 
 ![image-20230930181846475](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20230930181846475.png)
+
+### SURSwitch
+
+SURSwitch is a switch used for simple judgment scenarios
+
+#### properties
+
+* `in-out property <bool> active` : active option;
+* `in property <brush> switch-background-color `: switch circle background color;
+* `in property <brush> switch-border-color` : switch circle border color
+* `in property <color> switch-drop-shadow-color` : switch circle drop shadow color
+
+#### callbacks
+
+* `callback clicked(bool)` : run if you click the switch
+
+#### example
+
+```
+import { SURSwitch } from "../../index.slint";
+
+component TestSwitch inherits Window {
+  height: 400px;
+  width: 400px;
+  SURSwitch {
+    y: 30px;
+  }
+  SURSwitch {
+    theme: Primary;
+    y: 80px;
+    switch-background-color:#ddd;
+    switch-border-color:#00ff00;
+  }
+  SURSwitch {
+    y: 130px;
+    theme: Dark;
+    clicked(active-or-not)=>{
+      debug(active-or-not);
+    }
+  }
+  SURSwitch {
+    y: 180px;
+    theme: Warning;
+  }
+  SURSwitch {
+    y: 230px;
+    theme: Error;
+  }
+  SURSwitch {
+    y: 280px;
+    theme: Info;
+  }
+}
+```
+
+![image-20231018185602735](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231018185602735.png)
+
+### SURSwitchGroup
+
+SURSwitchGroup switch group can contain more switch cases
+
+#### properties
+
+* `in-out property <bool> active` : active option index;
+* `in-out property <[string]> switchs` : switch options
+* `in property <length> font-size` : font size , it will effect switch component height
+* `private property <brush> theme-color` : inner theme color ⛔
+
+#### callbacks
+
+* `callback clicked(int,string)` : run if you click the switch , it will back option index and option name
+
+#### example
+
+```
+import { SURSwitchGroup } from "../../index.slint";
+
+component TestSwitchGroup inherits Window {
+  height: 400px;
+  width: 400px;
+  SURSwitchGroup {
+   theme: Primary;
+    clicked(i,name) => {
+      debug(i);
+      debug(name);
+    }
+  }
+  SURSwitchGroup {
+    y: 120px;
+    theme:Dark;
+    switchs:["1","2","3","4"];
+     clicked(i,name) => {
+       debug(i);
+       debug(name);
+     }
+   }
+}
+```
+
+![image-20231104201007098](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231104201007098.png)
+
+### SURSwitchOption
+
+SURSwitchOption can show option info
+
+#### properties
+
+* `in-out property <bool> active` : active option;
+* `in property <string> left` : left option;
+* `in property <string> right` : right option;
+* `in property <length> font-size` : font size , it will effect switch component height;
+* `in property <brush> switch-background-color` : switch circle background color;
+* `in property <brush> switch-border-color` : switch circle border color
+* `in property <color> switch-drop-shadow-color` : switch circle drop shadow color
+
+#### callbacks
+
+* `callback clicked(bool)` : run if you click the switch
+
+#### example
+
+```
+import { SURSwitchOption } from "../../index.slint";
+
+component TestSwitchOption inherits Window {
+  height: 400px;
+  width: 400px;
+  SURSwitchOption {
+    y: 30px;
+    left:"surrealism";
+    right:"slint";
+    clicked(res) => {
+      debug(res)
+    }
+  }
+  SURSwitchOption {
+    y: 100px;
+    theme: Primary;
+    left:"surrealism";
+    right:"slint";
+  }
+  SURSwitchOption {
+    y: 170px;
+    theme: Dark;
+    left:"surrealism";
+    right:"slint";
+  }
+}
+```
+
+![image-20231104201049848](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231104201049848.png)
+
+### SURDrawer
+
+Sometimes, the Dialogue component does not meet our needs
+
+such as your form being too long, or if you need to temporarily display some documents, please use the SURDrawer
+
+#### properties
+
+* `in property <Themes> drawer-theme` : drawer theme
+* `in property <brush> drawer-background-color` : drawer background color
+* `in property <CommonPosition > pos` : drawer position (Left, Right, Top, Bottom)
+* `in property <percent> proportion` : drawer proportion 
+
+#### functions
+
+* `function default-height-width()->{height:percent,width:percent}` : count drawer height and width ⛔
+* `function get-pos()->{x:length,y:length}` : count position ⛔
+
+#### example
+
+```
+import {SURDrawer,SURButton, SURInput} from "../../index.slint";
+import {Themes} from "../../themes/index.slint";
+
+component TestDrawer inherits Window {
+  height: 800px;
+  width: 800px;
+  background: #535353;
+ 
+  SURButton {
+    
+    content: "show";
+    clicked => {
+      p.open();
+      
+      debug("sds1")
+    }
+  }
+ 
+
+  p:=SURDrawer {
+    proportion:36%;
+    SURButton {
+      theme: Dark;
+    }
+    SURInput { 
+      y: 30px;
+     }
+  }
+}
+```
+
+![image-20231018200348306](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231018200348306.png)
+
+### SURAlert
+
+SURAlert is used to display important prompt information on the page
+
+#### properties
+
+* `private property <Themes> theme` : Surrealism theme ⛔
+* `in-out property <string> content` :  alert content you want to display
+* `in-out property <bool> is-show` : show the alert or not
+* `in property <ResType> res-type` : result type👍
+
+#### functions
+
+* `public function open()` : open alert
+* `public function close()` : close alert
+
+#### example
+
+```
+import {SURButton, SURAlert} from "../../index.slint";
+import {Themes,ResType} from "../../themes/index.slint";
+
+component TestAlert inherits Window {
+  height: 400px;
+  width: 600px;
+  background: #535353;
+ 
+  SURButton {
+    
+    text: "show";
+    clicked => {
+      p.open();
+      
+      debug("sds1")
+    }
+  }
+ 
+
+  p:=SURAlert { 
+    res-type:ResType.Success ;
+    content:"this is a success message!";
+  }
+}
+```
+
+![image-20231018203824259](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231018203824259.png)
+
+### SURTree
+
+SURTree can be used to display directory structure, forming a parent-child relationship, and can be easily displayed
+
+#### properties
+
+* `in-out property <TreeData> tree-data` : the data to be displayed
+
+#### callbacks
+
+* `callback clicked(int,string,string)` : run after you click an item
+
+### example
+
+```
+import {SURTree } from "../../index.slint";
+import { IconSources } from "../../themes/index.slint";
+
+component TestTree inherits Window {
+  height: 400px;
+  width: 400px;
+  SURTree{
+    y: 10px;
+    theme: Dark;
+    height: 45%;
+    width: 96%;
+    tree-data:{
+      icon : IconSources.icons.Folder_filled,
+      label: "SurrealismUI",
+      extra:"",
+      children:[
+        {
+          icon:IconSources.icons.FileCode,
+          label:"slint.slint",
+          extra:"12KB", 
+        },
+        {
+          icon:IconSources.icons.FileCode,
+          label:"surrealism.slint",
+          extra:"126KB", 
+        },
+        {
+          icon:@image-url("../../icons/file-jpg.svg"),
+          label:"icon.jpg",
+          extra:"196KB", 
+        },
+        {
+          icon:@image-url("../../icons/file-gif.svg"),
+          label:"ui.gif",
+          extra:"91KB", 
+        },
+        {
+          icon:@image-url("../../icons/file-gif.svg"),
+          label:"ui2.gif",
+          extra:"107KB", 
+        }
+      ]
+    };
+    clicked(i,n,e)=>{
+      debug(n);
+    }
+  }
+  SURTree {
+    y: 200px;
+    height: 46%;
+    width: 96%;
+  }
+}
+```
+
+![image-20231105160644598](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231105160644598.png)
+
+### SURFile
+
+SURFile can help users present file selectors GUI
+
+#### properties
+
+* `in property <[TabItem]> tabs` : tabs will be displayed 
+* `in property <TabConfigs> tab-configs` : configurations of the tab
+* `in-out property <[FileItem]> files` : files and folders details
+* `in property <ItemConfigs> item-configs` : configurations of files and folders details
+
+#### callbacks
+
+* `callback tab-clicked(int,TabItem)` : run if you click the tab
+* `callback item-clicked(int,FileItem)` : run if you click a file item
+
+#### example
+
+```
+import {SURFile,ItemConfigs,FileItem,ItemConfigs} from "../../index.slint";
+import { Themes,PaddingSize,IconSources} from "../../themes/index.slint";
+
+export component TestFile inherits Window {
+  height: 400px;
+  width: 800px;
+  SURFile{
+    theme: Dark;
+    width: 90%;
+    height: 46%;
+    tab-configs : {
+      height:16px,
+      font-size:14px,
+      padding-size:PaddingSize.Tip,
+      theme: Themes.Dark,
+      column-width:[200px,100px,100px,80px]
+    };
+    item-configs : {
+      height:16px,
+      font-size:12px,
+      padding-size:PaddingSize.Normal,
+      theme: Themes.Dark,
+      icon-size:16px
+    };
+    files : [
+      {icon:IconSources.icons.Folder-filled , name : "font" , datetime : "2023-11-06" , file-type : "folder" , size : "900KB"},
+      {icon:IconSources.icons.FileCode , name : "index.slint" , datetime : "2023-11-06" , file-type : "SLINT file" , size : "3KB"},
+      {icon:IconSources.icons.FileCode , name : "LICENSE" , datetime : "2023-11-06" , file-type : "file" , size : "2KB"},
+      {icon:IconSources.icons.FileCode , name : "LICENSE" , datetime : "2023-11-06" , file-type : "file" , size : "2KB"},
+      {icon:IconSources.icons.FileCode , name : "LICENSE" , datetime : "2023-11-06" , file-type : "file" , size : "2KB"}
+    ];
+    tab-clicked(index,item)=>{
+      debug(index);
+      debug(item);
+    }
+    item-clicked(index,item)=>{
+      debug(index);
+      debug(item);
+    }
+  }
+}
+```
+
+![image-20231105160623486](https://github.com/syf20020816/SurrealismUI/blob/main/README/imgs/image-20231105160623486.png)
+
+## Updates
+
+- V0.2.2（Slint 1.3.0）
+  - 中文：
+    - 优化内置Global：
+      - 修复标准内置方法：`get-padding()`
+      - 增加`PaddingSize Enum`类型`PaddingSize.Tag`
+      - 增加标准内置方法`get-color()`
+      - 增加标准内置枚举`ColorLevel`
+    - 优化`SURText`
+      - 修改属性名`content -> text`
+    - 优化`SURTag`：
+      - 修复`SURTag`样式异常
+      - `SURTag` remove content property , please use text (as Builtin `Text`)
+      - `callback clicked(string)`增加返回参数(`tag text`)
+    - 优化`SURIcon`
+      - 修改属性名`icon -> source`
+      - 移除`get-icon()`
+    - 优化`SURButton`
+      - 增加`show-icon`属性控制是否加载图片
+      - 修复按钮异常
+      - 修改属性名`content -> text`
+    - 优化`SURLink`
+      - 修改属性名`content -> text`
+      - `callback clicked(string)`增加返回参数(`link text`)
+      - 增加hover控制下划线触发效果
+      - 增加`underline`属性控制下划线显示
+    - 修复`SURAvatar`默认Icon消失问题
+  - English
+    - Optimize built-in Global:
+      - Fix standard built-in methods: ` get padding ()`
+      - Add `PaddingSize Enum` type `PaddingSize.Tag`
+      - Add Standard Built-in Method ` get color()`
+      - Add Standard Built-in Enumeration ` ColorLevel`
+    - Optimize ` SURText`
+      - Modify Attribute Name ` content ->text`
+    - Optimize `SURTag`:
+      - Fix `SURTag` style anomalies
+      - `SURTag` remove content property, please use text (as Built in `Text`)
+      - `callback clicked (string)` Add return parameter (`tag text`)
+    - Optimize ` SURIcon`
+      - Modify Attribute Name ` icon ->source`
+      - Remove ` get icon ()`
+    - Optimize ` SURButton`
+      - Add the `show icon` attribute to control whether to load images
+      - Fix button error
+      - Modify Attribute Name ` content ->text`
+    - Optimize ` SURLink`
+      - Modify Attribute Name ` content ->text`
+      - `callback clicked (string)` Add return parameters (`link text`)
+      - Add hover control underline trigger effect
+      - Add the `underline` attribute to control the display of underscores
+    - Fix the issue of `SURAvatar` default Icon disappearing
+
+- V0.2.1
+  - add `SURTree`
+  - add `SURFile`
+
+- V0.2.0
+  - add `SURSwitchOption`
+  - add `SURSwitchGroup`
+  - optimize `SURInput`
+
+- V0.1.7
+  - add `SURSwitch`
+  - add `SURDrawer`
+  - add `SURAlert`
+
+- V0.1.6
+  - solve `SURLoading` animation!
+
+- V0.1.5
+  - add `SURMenu`
+  - enhance `SURTip` (the location of the tip can be changed now  and you can show it with hover ! )
+
+- V0.1.4
+  - add `SURTip`
+  - add `SURLoading`
+  - add `SURDialog`
+
+- V0.1.3
+  - add `SURBadge`
+  - add `Progress`
+  - add `Persona`
+- V0.1.2
+  - rebuild components (have `SURIcon`)
+  - rebuild `SURIcon`
+  - rebuild file structure
+  - solve memery overflow issue
+  - use minimize import principle (remove inner loop to judge component show!)❗
+  - test use Rust✅
+- V0.1.1
+  - add `SURRadio`
+  - add `SURDivider`
+  - add `SURCollection`
+  - add `SURPopup`
+- V0.1.0
+  - Adopting Fluent2's component design style
+  - Multiple default methods are provided for consumers to call (see index.slint which on the outermost side)
+  - Decoupling functions and components
+  - Fix some style errors
+  - add `SURLink` and `SURAvatar`

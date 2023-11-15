@@ -1,7 +1,8 @@
 import {GroupBox,ComboBox, ListView,Button, LineEdit} from "std-widgets.slint";
 import { SURButton,SURInput } from "../../SurrealismUI-main/index.slint";
-import { Themes,IconSources } from "../../SurrealismUI-main/themes/index.slint";
+import { Themes, IconSources, PaddingSize} from "../../SurrealismUI-main/themes/index.slint";
 import { Time } from "bottom.slint";
+import { Boxview } from "box_widget.slint";
 export struct Action  {
     type: string,
     text: string,
@@ -51,29 +52,31 @@ export component QueryPage inherits Rectangle {
             alignment: start;
             spacing :20px;
             padding: 15px;
-            text-edit :=LineEdit {
+            text-edit :=SURInput {
+                width: 40%;
                 y:10px;
                 height: 30px;
-                width: 400px;
-                placeholder-text : @tr("输入条码....");
+                input-width: 250px;
+                placeholder : @tr("输入条码....");
                 accepted => {
                     query.clicked();
                     
                 }
+                clearable: true;
                 // theme:Themes.Warning;
                 // clearable:true;
 
             }
 
-            text-edit-clean := SURButton{
-                y:10px;
-                height: 30px;
-                content: "";
-                icon: @image-url("../../SurrealismUI-main/icons/clear.svg");
-                clicked => {
-                    text-edit.text = ""
-                }
-            }
+            // text-edit-clean := SURButton{
+            //     y:10px;
+            //     height: 30px;
+            //     text: "";
+            //     icon: @image-url("../../SurrealismUI-main/icons/clear.svg");
+            //     clicked => {
+            //         text-edit.text = ""
+            //     }
+            // }
             
             mode_cb := ComboBox {
                 y:10px;
@@ -90,11 +93,11 @@ export component QueryPage inherits Rectangle {
                 width: 70px;
                 height: 32px;
                 icon: @image-url("../../SurrealismUI-main/icons/search.svg");
-                content: @tr(" 查询 ");
+                text: @tr(" 查询 ");
                 clicked => {
                     InfosData.query({
                     type:mode-cb.current-value,
-                    text:text-edit.text
+                    text:text-edit.get()
                     })
                 }
                 
@@ -255,6 +258,7 @@ export component QueryPage inherits Rectangle {
                 }
             }
         }
+      
 
         if mode-cb.current-index == 1 :VerticalLayout{
         alignment: start;

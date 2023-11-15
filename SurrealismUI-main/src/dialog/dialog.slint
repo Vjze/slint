@@ -51,8 +51,8 @@ export component Dialog inherits Window {
   in property <string> dialog-details : "This is a dialog info";
   in property <Themes> cancel-btn-theme : Info;
   in property <Themes> confirm-btn-theme : Primary;
-  in property <string> cancel-btn-content : "取消";
-  in property <string> confirm-btn-content : "确定";
+  in property <string> cancel-btn-content : "Cancel";
+  in property <string> confirm-btn-content : "Confirm";
   in-out property <bool> is-show:false;
   in property <Themes> theme :Dark;
   in property <float> dialog-height : 0.34;
@@ -78,7 +78,7 @@ export component Dialog inherits Window {
   area:=TouchArea {
     z: 110;
     clicked => {
-      // root.close()
+      root.close()
     }
     TouchArea {
       height: dialog.height;
@@ -94,7 +94,7 @@ export component Dialog inherits Window {
             title:=SURText { 
               font-size: root.dialog-title-size;
               font-weight: 700;
-              content: root.dialog-title;
+              text: root.dialog-title;
             }
           }
           details-view:=Rectangle{
@@ -107,7 +107,7 @@ export component Dialog inherits Window {
               padding-top: ROOT-STYLES.sur-padding.normal.top-bottom;
               padding-bottom: ROOT-STYLES.sur-padding.normal.top-bottom;
               if root.dialog-details!="": details:=SURText{
-                content: root.dialog-details;
+                text: root.dialog-details;
                 wrap: word-wrap;
               }
               @children
@@ -128,7 +128,7 @@ export component Dialog inherits Window {
                   drop-shadow-blur: 0;
                   drop-shadow-offset-x: 0;
                   drop-shadow-offset-y: 0;
-                  content: root.cancel-btn-content;
+                  text: root.cancel-btn-content;
                   clicked => {
                     root.cancel();
                     root.close();
@@ -142,7 +142,7 @@ export component Dialog inherits Window {
                   drop-shadow-blur: 0;
                   drop-shadow-offset-x: 0;
                   drop-shadow-offset-y: 0;
-                  content: root.confirm-btn-content;
+                  text: root.confirm-btn-content;
                   clicked => {
                     root.confirm();
                     root.close();

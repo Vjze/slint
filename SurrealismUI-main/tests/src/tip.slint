@@ -14,7 +14,7 @@ component TestWindow inherits Window {
      content:"this is a \n........tip window";
      show-tip:inner0.has-hover;
      inner0:=SURButton { 
-       content: "click";
+       text: "click";
      }
    }
   SURTip{
@@ -24,7 +24,7 @@ component TestWindow inherits Window {
     pos:Left;
     content:"this is a \n........tip window";
     inner:=SURButton { 
-      content: "click";
+      text: "click";
       clicked => {
         parent.clicked();
       }
@@ -38,7 +38,7 @@ component TestWindow inherits Window {
     pos:Top;
     content:"this is a \n........tip window";
     inner2:=SURButton { 
-      content: "click";
+      text: "click";
       clicked => {
         parent.clicked();
       }
