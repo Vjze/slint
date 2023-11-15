@@ -50,9 +50,11 @@ export component QueryPage inherits Rectangle {
             height: 50px;
             alignment: start;
             spacing :20px;
+            padding: 15px;
             text-edit :=LineEdit {
                 y:10px;
                 height: 30px;
+                width: 400px;
                 placeholder-text : @tr("输入条码....");
                 accepted => {
                     query.clicked();
@@ -81,7 +83,7 @@ export component QueryPage inherits Rectangle {
                 
 
             }
-        
+            
             query := SURButton {
                 // theme: Light;
                 y:10px;
@@ -102,12 +104,14 @@ export component QueryPage inherits Rectangle {
             }
         
             text := Rectangle {
-                Text{
-                   text : @tr("数量：{}",InfosData.text);
-                   font-size: 15px;
-                   font-weight: 650;
+                HorizontalLayout {
+                    y:8px;
+                    Text{
+                    text : @tr("数量：{}",InfosData.text);
+                    font-size: 15px;
+                    font-weight: 650;
+                    }
                 }
-                 
                 
             }
         
@@ -328,23 +332,27 @@ export component QueryPage inherits Rectangle {
                 }
             }
         }
-        HorizontalLayout {
+    }
+        VerticalLayout {
+            padding: 15px;
+            alignment: end;
             HorizontalLayout {
-                alignment: end;
-                vertical-stretch:1;
-                Time {}
+                HorizontalLayout {
+                    alignment: end;
+                    vertical-stretch:1;
+                    Time {}
+                }
+                HorizontalLayout {
+                    alignment: end;
+                    Text{
+                        text : @tr("Version:{}",InfosData.version);
+                        font-size: 14px;
+                        vertical-alignment: center;
+                        horizontal-alignment: center;
+                        font-weight: 550;
+                    }
+                }
             }
-            HorizontalLayout {
-                alignment: end;
-                Text{
-                    text : @tr("Version:{}",InfosData.version);
-                    font-size: 14px;
-                    vertical-alignment: center;
-                    horizontal-alignment: center;
-                    font-weight: 550;
-                 }
-            }
-        }
         
     }
 }
